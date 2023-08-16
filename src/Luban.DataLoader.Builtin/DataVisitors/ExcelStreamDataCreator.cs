@@ -262,14 +262,14 @@ class ExcelStreamDataCreator : ITypeFuncVisitor<ExcelStream, DType>
         {
             if (type.IsNullable)
             {
-                string subType = x.Read().ToString().Trim();
+                string subType = x.DetectReadSkipNull().ToString().Trim();
                 if (subType == FieldNames.BeanNullType)
                 {
                     return null;
                 }
                 else if (subType != FieldNames.BeanNotNullType && subType != originBean.Name)
                 {
-                    throw new Exception($"type:'{originBean.FullName}' 可空标识:'{subType}' 不合法（只能为{FieldNames.BeanNotNullType}或{FieldNames.BeanNullType}或{originBean.Name})");
+                    // throw new Exception($"type:'{originBean.FullName}' 可空标识:'{subType}' 不合法（只能为{FieldNames.BeanNotNullType}或{FieldNames.BeanNullType}或{originBean.Name})");
                 }
             }
             return new DBean(type, originBean, CreateBeanFields(originBean, x));

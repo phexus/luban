@@ -208,6 +208,25 @@ class ExcelStream
         return notSkip ? ReadMayNull() : ReadSkipNull();
     }
 
+    /// <summary>
+    /// Don't change index after read. Just a detect read.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public object DetectReadSkipNull()
+    {
+        int currentIndex = _curIndex;
+        while (currentIndex <= _toIndex)
+        {
+            var data = _datas[currentIndex++];
+            if (!IsSkip(data.Value))
+            {
+                return data.Value;
+            }
+        }
+        throw new Exception($"cell:{_datas[_curIndex - 1]} 缺少数据");
+    }
+
     private object ReadMayNull()
     {
         return _curIndex <= _toIndex ? _datas[LastReadIndex = _curIndex++].Value : null;
