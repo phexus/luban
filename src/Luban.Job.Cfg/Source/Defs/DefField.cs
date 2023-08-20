@@ -84,11 +84,11 @@ namespace Luban.Job.Cfg.Defs
             {
                 if (Ref != null)
                 {
-                    return $"{RefType.Apply(CsDefineTypeName.Ins)} {RefVarName} {{ get; private set; }}";
+                    return $"{RefType.Apply(CsDefineTypeName.Ins)} {RefVarName} {{ get; set; }}";
                 }
                 else if (ElementRef != null)
                 {
-                    return $"{ElementRefType.Apply(CsDefineTypeName.Ins)} {RefVarName} {{ get; private set; }}";
+                    return $"{ElementRefType.Apply(CsDefineTypeName.Ins)} {RefVarName} {{ get; set; }}";
                 }
                 else
                 {
